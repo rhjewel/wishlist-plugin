@@ -1,0 +1,821 @@
+EGNS WISHLIST PLUGIN DOCUMENTATION
+==================================
+
+Plugin Name: EGNS Wishlist
+Version: 1.0.0
+Text Domain: egns-wishlist
+
+
+1. OVERVIEW
+-----------
+
+EGNS Wishlist is a reusable WordPress wishlist plugin. It is not limited to
+WooCommerce products. It can work with posts, pages, products, tours, rooms,
+portfolio items, services, packages, or any public custom post type selected
+from the plugin admin settings.
+
+The plugin supports:
+
+- Wishlist button shortcode
+- Wishlist page shortcode
+- Wishlist count shortcode
+- Wishlist link shortcode
+- AJAX add/remove
+- Guest wishlist using browser cookie
+- Logged-in user wishlist
+- Guest wishlist merge after login
+- Admin settings
+- Custom button text
+- Custom SVG icons
+- Toast notification
+- Optional WooCommerce product data
+
+
+2. INSTALLATION
+---------------
+
+1. Upload the plugin folder to:
+
+   wp-content/plugins/egns-wishlist/
+
+2. Go to WordPress Admin > Plugins.
+
+3. Activate "EGNS Wishlist".
+
+4. After activation, a new admin menu appears:
+
+   Egns-wishlist
+
+5. Configure the plugin from the submenu pages.
+
+
+3. ADMIN MENU
+-------------
+
+After activation, the plugin creates a main WordPress admin menu:
+
+Egns-wishlist
+
+Under this menu you will find:
+
+- General Settings
+- Post Type Settings
+- Button Settings
+- Icon Settings
+- Wishlist Page Settings
+- WooCommerce Settings
+- Notification Settings
+
+
+4. GENERAL SETTINGS
+-------------------
+
+Location:
+
+WordPress Admin > Egns-wishlist > General Settings
+
+Available options:
+
+Enable Wishlist
+Turns the wishlist feature on or off globally.
+
+Enable Guest Wishlist
+Allows non-logged-in users to add items to wishlist.
+
+Enable AJAX
+Allows add/remove wishlist actions without page reload.
+
+Redirect Guest to Login
+If enabled, guest users must log in before adding items to wishlist.
+
+Merge Guest Wishlist After Login
+If enabled, guest wishlist items are moved into the user wishlist after login.
+
+Delete Data on Uninstall
+If enabled, plugin options and wishlist database table are deleted when the
+plugin is uninstalled.
+
+Wishlist Page
+Select the WordPress page where you added the [wishlist_page] shortcode.
+
+
+5. CREATE A WISHLIST PAGE
+-------------------------
+
+1. Go to WordPress Admin > Pages > Add New.
+
+2. Create a page named for example:
+
+   Wishlist
+
+3. Add this shortcode inside the page content:
+
+   [wishlist_page]
+
+4. Publish the page.
+
+5. Go to:
+
+   Egns-wishlist > General Settings
+
+6. Select this page in the "Wishlist Page" dropdown.
+
+7. Save changes.
+
+You can also use this alias shortcode:
+
+   [my_wishlist]
+
+
+6. POST TYPE SETTINGS
+---------------------
+
+Location:
+
+WordPress Admin > Egns-wishlist > Post Type Settings
+
+Enabled Post Types
+Select which public post types can use wishlist.
+
+Examples:
+
+- Post
+- Page
+- Product
+- Tour
+- Hotel
+- Room
+- Portfolio
+- Service
+
+Attachment/media post type is excluded.
+
+Auto Display Button
+If enabled, the plugin can automatically show the wishlist button on selected
+post types.
+
+Auto Display Position
+Choose where the button should appear:
+
+- Manual Shortcode Only
+- Before Content
+- After Content
+- After Title
+
+Recommended:
+
+Use "Manual Shortcode Only" if your theme has custom layouts or Elementor
+templates. Then place the button exactly where you want with shortcode.
+
+
+7. BUTTON SHORTCODE
+-------------------
+
+Use this shortcode to show the wishlist button for the current post:
+
+   [wishlist_button]
+
+Use this shortcode to show the wishlist button for a specific post ID:
+
+   [wishlist_button id="123"]
+
+Optional attributes:
+
+   [wishlist_button id="123" show_text="yes" show_icon="yes" class="custom-class"]
+
+Attributes:
+
+id
+Post ID. If empty, current post ID is used.
+
+show_text
+Use "yes" or "no". Controls button text.
+
+show_icon
+Use "yes" or "no". Controls button icon.
+
+class
+Adds an extra CSS class to the button.
+
+
+8. BUTTON SETTINGS
+------------------
+
+Location:
+
+WordPress Admin > Egns-wishlist > Button Settings
+
+Button Text
+Text shown when an item is not in wishlist.
+
+Default:
+
+   Add to Wishlist
+
+Added Button Text
+Text shown when an item is already added.
+
+Default:
+
+   Added to Wishlist
+
+Remove Button Text
+Text shown on the remove button inside wishlist page.
+
+Default:
+
+   Remove
+
+Show Text
+Show or hide text inside wishlist button.
+
+Show Icon
+Show or hide icon inside wishlist button.
+
+Button CSS Class
+Add a custom class for theme styling.
+
+
+9. ICON SETTINGS
+----------------
+
+Location:
+
+WordPress Admin > Egns-wishlist > Icon Settings
+
+Icon Type
+Current supported type is SVG/custom HTML.
+
+Normal Icon
+Icon shown before an item is added.
+
+Added Icon
+Icon shown after an item is added.
+
+Icon Size
+Icon size in pixels.
+
+Icon Color
+Normal icon color.
+
+Added Icon Color
+Added icon color.
+
+Security note:
+
+SVG output is filtered with wp_kses using a strict SVG allow-list. Avoid adding
+script, iframe, event attributes, or unsafe HTML. They will be removed.
+
+
+10. WISHLIST PAGE SETTINGS
+--------------------------
+
+Location:
+
+WordPress Admin > Egns-wishlist > Wishlist Page Settings
+
+Empty Wishlist Message
+Message shown when the wishlist has no items.
+
+Show Featured Image
+Show item thumbnail on the wishlist page.
+
+Show Title
+Show item title on the wishlist page.
+
+Show Post Type
+Show item post type label.
+
+Show Date Added
+Show the date when the item was added.
+
+Show Remove Button
+Show remove button for each wishlist item.
+
+Show View Button
+Show view button linking to the single item page.
+
+Enable Share Wishlist
+Reserved setting for public share URL support. Current version stores the option
+but does not yet generate public share URLs.
+
+
+11. WISHLIST COUNT SHORTCODE
+----------------------------
+
+Use this shortcode to show the current wishlist count:
+
+   [wishlist_count]
+
+Output example:
+
+   <span class="egwl-count">3</span>
+
+This count updates after AJAX add/remove.
+
+
+12. WISHLIST LINK SHORTCODE
+---------------------------
+
+Use this shortcode to show a link to the selected wishlist page:
+
+   [wishlist_link]
+
+Output example:
+
+   Wishlist 3
+
+Optional text:
+
+   [wishlist_link text="My Wishlist"]
+
+Important:
+
+The link uses the page selected in:
+
+   Egns-wishlist > General Settings > Wishlist Page
+
+
+13. NOTIFICATION SETTINGS
+-------------------------
+
+Location:
+
+WordPress Admin > Egns-wishlist > Notification Settings
+
+Enable Toast
+Show or hide frontend toast notification.
+
+Added Message
+Message after adding an item.
+
+Removed Message
+Message after removing an item.
+
+Already Added Message
+Message when a duplicate item is prevented.
+
+Toast Position
+Choose notification position:
+
+- Bottom Right
+- Bottom Left
+- Top Right
+- Top Left
+
+
+14. WOOCOMMERCE SETTINGS
+------------------------
+
+Location:
+
+WordPress Admin > Egns-wishlist > WooCommerce Settings
+
+These settings are useful only when WooCommerce is active.
+
+Enable WooCommerce Support
+Turns product-specific wishlist behavior on or off.
+
+Show Price
+Shows WooCommerce product price on the wishlist page.
+
+Show Stock Status
+Shows product stock status on the wishlist page.
+
+Show Add to Cart
+Shows add-to-cart button for simple products on the wishlist page.
+
+Remove After Add to Cart
+Removes the product from wishlist after it is added to cart.
+
+Single Product Button Position
+Controls wishlist button position on a single product page.
+
+Shop Loop Button Position
+Controls wishlist button position on WooCommerce archive/shop loop.
+
+Note:
+
+Simple products are supported first. Variable product variation-specific
+wishlist support can be added in a later phase.
+
+
+15. FRONTEND CSS CLASSES
+------------------------
+
+Main wishlist button:
+
+   .egwl-button
+
+Button when item is added:
+
+   .egwl-button.is-added
+
+Normal icon:
+
+   .egwl-icon-normal
+
+Added icon:
+
+   .egwl-icon-added
+
+Wishlist count:
+
+   .egwl-count
+
+Wishlist page wrapper:
+
+   .egwl-page
+
+Wishlist item:
+
+   .egwl-item
+
+Remove button:
+
+   .egwl-remove-button
+
+Toast notification:
+
+   .egwl-toast
+
+
+16. BASIC CSS CUSTOMIZATION
+---------------------------
+
+You can add custom CSS in your theme or child theme.
+
+Example:
+
+   .egwl-button {
+       border-color: #e0245e;
+       color: #e0245e;
+       border-radius: 6px;
+   }
+
+   .egwl-button.is-added {
+       background: #e0245e;
+       color: #ffffff;
+   }
+
+   .egwl-item {
+       border-color: #dddddd;
+   }
+
+
+17. TEMPLATE FILES
+------------------
+
+Plugin templates are located in:
+
+   wp-content/plugins/egns-wishlist/templates/
+
+Available templates:
+
+- wishlist-button.php
+- wishlist-page.php
+- wishlist-item.php
+- empty-wishlist.php
+
+You can modify these files directly during development. For production theme
+override support, add a template override system in Template_Loader.php.
+
+
+18. ASSET FILES
+---------------
+
+Frontend CSS:
+
+   wp-content/plugins/egns-wishlist/assets/css/frontend.css
+
+Frontend JS:
+
+   wp-content/plugins/egns-wishlist/assets/js/frontend.js
+
+Admin CSS:
+
+   wp-content/plugins/egns-wishlist/assets/css/admin.css
+
+Admin JS:
+
+   wp-content/plugins/egns-wishlist/assets/js/admin.js
+
+
+19. DATABASE TABLE
+------------------
+
+The plugin creates this custom table on activation:
+
+   {$wpdb->prefix}egwl_items
+
+Main columns:
+
+- id
+- owner_type
+- owner_id
+- post_id
+- post_type
+- variation_id
+- quantity
+- created_at
+
+Owner examples:
+
+Logged-in user:
+
+   owner_type = user
+   owner_id   = 25
+
+Guest user:
+
+   owner_type = guest
+   owner_id   = generated session ID
+
+Duplicate prevention:
+
+The table uses a unique key for:
+
+   owner_type, owner_id, post_id, variation_id
+
+
+20. MAIN PHP CLASSES
+--------------------
+
+Plugin bootstrap:
+
+   includes/Plugin.php
+
+Activation/table creation:
+
+   includes/Activator.php
+   includes/Installer.php
+
+Database operations:
+
+   includes/Database.php
+
+Wishlist business logic:
+
+   includes/Wishlist_Manager.php
+
+Guest cookie/session handling:
+
+   includes/Session_Manager.php
+
+Shortcodes:
+
+   includes/Shortcodes.php
+
+AJAX:
+
+   includes/Ajax.php
+
+Admin menu/settings:
+
+   includes/Admin.php
+
+Frontend/admin assets:
+
+   includes/Assets.php
+
+Icons and SVG filtering:
+
+   includes/Icons.php
+
+WooCommerce integration:
+
+   includes/WooCommerce.php
+
+
+21. HOW TO MODIFY SHORTCODES
+----------------------------
+
+Shortcodes are registered in:
+
+   includes/Shortcodes.php
+
+To add a new shortcode:
+
+1. Add a new add_shortcode call inside register().
+
+2. Create a public method that returns escaped HTML.
+
+Example:
+
+   add_shortcode( 'wishlist_total', array( $this, 'count' ) );
+
+
+22. HOW TO MODIFY AJAX BEHAVIOR
+-------------------------------
+
+AJAX handlers are in:
+
+   includes/Ajax.php
+
+Current AJAX actions:
+
+   egwl_toggle
+   egwl_remove
+
+Frontend JavaScript sends requests from:
+
+   assets/js/frontend.js
+
+If adding new AJAX actions:
+
+1. Register both logged-in and guest actions if needed.
+
+2. Always use check_ajax_referer().
+
+3. Sanitize all input values.
+
+4. Return JSON using wp_send_json_success() or wp_send_json_error().
+
+
+23. HOW TO MODIFY WISHLIST LOGIC
+--------------------------------
+
+Main wishlist methods are in:
+
+   includes/Wishlist_Manager.php
+
+Important methods:
+
+add()
+Adds an item to wishlist.
+
+remove()
+Removes an item from wishlist.
+
+toggle()
+Adds or removes depending on current state.
+
+is_added()
+Checks if item already exists in wishlist.
+
+get_items()
+Returns current owner wishlist items.
+
+get_count()
+Returns current owner wishlist item count.
+
+
+24. HOW TO MODIFY DATABASE QUERIES
+----------------------------------
+
+Database methods are in:
+
+   includes/Database.php
+
+Important methods:
+
+insert_item()
+Adds item to database.
+
+delete_item()
+Removes item from database.
+
+item_exists()
+Checks duplicate item.
+
+get_items()
+Gets all wishlist items for current owner.
+
+get_count()
+Gets wishlist count.
+
+merge_guest_to_user()
+Moves guest items to logged-in user after login.
+
+
+25. SECURITY NOTES
+------------------
+
+The plugin uses:
+
+- Nonce verification for AJAX
+- Sanitization for admin settings
+- Escaping in templates
+- Strict SVG wp_kses allow-list
+- Prepared SQL queries
+- Custom table unique key for duplicate prevention
+
+When modifying the plugin:
+
+- Never output user input directly.
+- Use esc_html(), esc_attr(), esc_url(), or wp_kses_post().
+- Use wp_kses() for custom SVG/HTML.
+- Use $wpdb->prepare() for custom SQL.
+- Use current_user_can() for admin-only actions.
+
+
+26. COMMON USAGE EXAMPLES
+-------------------------
+
+Show wishlist button in a single post template:
+
+   echo do_shortcode( '[wishlist_button]' );
+
+Show wishlist button for post ID 123:
+
+   echo do_shortcode( '[wishlist_button id="123"]' );
+
+Show wishlist page content:
+
+   echo do_shortcode( '[wishlist_page]' );
+
+Show wishlist count in header:
+
+   echo do_shortcode( '[wishlist_count]' );
+
+Show wishlist page link in header:
+
+   echo do_shortcode( '[wishlist_link text="Wishlist"]' );
+
+
+27. TROUBLESHOOTING
+-------------------
+
+Wishlist button does not show:
+
+- Check Egns-wishlist > General Settings > Enable Wishlist.
+- Check Egns-wishlist > Post Type Settings.
+- Make sure the current post type is selected.
+- If auto display is off, use [wishlist_button] manually.
+
+Guest users cannot add items:
+
+- Check Enable Guest Wishlist.
+- Check Redirect Guest to Login.
+
+Wishlist page is empty:
+
+- Make sure items were added from the same browser/user.
+- Make sure the page contains [wishlist_page].
+- Make sure the page is selected in General Settings.
+
+WooCommerce fields do not show:
+
+- Make sure WooCommerce is active.
+- Make sure Product is selected in Post Type Settings.
+- Check WooCommerce Settings.
+
+Styles do not look right:
+
+- Override CSS in your child theme.
+- Check assets/css/frontend.css for available classes.
+
+
+28. UNINSTALL BEHAVIOR
+----------------------
+
+The uninstall file is:
+
+   uninstall.php
+
+By default, data is kept when the plugin is uninstalled.
+
+If this option is enabled:
+
+   Egns-wishlist > General Settings > Delete Data on Uninstall
+
+Then uninstall will delete:
+
+- egwl_settings option
+- egwl_db_version option
+- {$wpdb->prefix}egwl_items database table
+
+
+29. RECOMMENDED FIRST SETUP
+---------------------------
+
+1. Activate the plugin.
+
+2. Create a page named "Wishlist".
+
+3. Add this shortcode:
+
+   [wishlist_page]
+
+4. Go to Egns-wishlist > General Settings.
+
+5. Select the Wishlist page.
+
+6. Go to Egns-wishlist > Post Type Settings.
+
+7. Select the post types where wishlist should work.
+
+8. Add [wishlist_button] in your template, Elementor shortcode widget, or page
+   content.
+
+9. Add [wishlist_link] or [wishlist_count] in your header/menu area if needed.
+
+
+30. CURRENT LIMITATIONS
+-----------------------
+
+- Public share wishlist URLs are not fully implemented yet.
+- WooCommerce variable product variation support is planned for a later phase.
+- Template override from theme is not implemented yet.
+- The plugin does not create the Wishlist page automatically.
+

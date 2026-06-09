@@ -1,0 +1,53 @@
+.egwl-admin-grid {
+	display: grid;
+	gap: 16px;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	margin-top: 18px;
+}
+
+.egwl-panel {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	padding: 18px;
+}
+
+.egwl-panel h2 {
+	margin: 0 0 14px;
+}
+
+.egwl-panel label {
+	display: block;
+	margin-bottom: 12px;
+}
+
+.egwl-panel label > span {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 5px;
+}
+
+.egwl-panel input[type="text"],
+.egwl-panel input[type="number"],
+.egwl-panel select,
+.egwl-panel textarea {
+	max-width: 100%;
+	width: 100%;
+}
+
+.egwl-toggle {
+	align-items: center;
+	display: flex !important;
+	gap: 8px;
+}
+
+.egwl-toggle span {
+	margin-bottom: 0 !important;
+}
+
+.egwl-check-list {
+	display: grid;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
