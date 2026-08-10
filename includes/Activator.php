@@ -20,6 +20,6 @@ class Activator {
 	public static function activate() {
 		Installer::create_tables();
 		Installer::add_default_options();
+		Installer::create_wishlist_page();
 	}
 }
-

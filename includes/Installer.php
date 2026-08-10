@@ -60,5 +60,64 @@ class Installer {
 
 		add_option( Settings::OPTION_NAME, Settings::defaults() );
 	}
-}
 
+	/**
+	 * Create and configure the default wishlist page.
+	 *
+	 * Reuse an existing Wishlist page when possible and add the shortcode only
+	 * when it is missing. This keeps activation idempotent without replacing any
+	 * existing page content.
+	 *
+	 * @return int Wishlist page ID, or 0 when the page could not be created.
+	 */
+	public static function create_wishlist_page() {
+		$settings = get_option( Settings::OPTION_NAME, array() );
+		$settings = is_array( $settings ) ? $settings : array();
+		$page_id  = 0;
+		$existing_page = get_page_by_path( 'wishlist', OBJECT, 'page' );
+
+		if (
+			$existing_page instanceof \WP_Post
+			&& 'publish' === $existing_page->post_status
+		) {
+			$page_id = (int) $existing_page->ID;
+
+			if ( ! has_shortcode( $existing_page->post_content, 'wishlist_page' ) ) {
+				$content = trim( $existing_page->post_content );
+				$content = $content ? $content . "\n\n[wishlist_page]" : '[wishlist_page]';
+
+				$result = wp_update_post(
+					array(
+						'ID'           => $page_id,
+						'post_content' => $content,
+					),
+					true
+				);
+
+				if ( is_wp_error( $result ) ) {
+					return 0;
+				}
+			}
+		} else {
+			$page_id = wp_insert_post(
+				array(
+					'post_title'   => __( 'Wishlist', 'egns-wishlist' ),
+					'post_name'    => 'wishlist',
+					'post_content' => '[wishlist_page]',
+					'post_status'  => 'publish',
+					'post_type'    => 'page',
+				),
+				true
+			);
+
+			if ( is_wp_error( $page_id ) ) {
+				return 0;
+			}
+		}
+
+		$settings['wishlist_page_id'] = (int) $page_id;
+		update_option( Settings::OPTION_NAME, wp_parse_args( $settings, Settings::defaults() ) );
+
+		return (int) $page_id;
+	}
+}
