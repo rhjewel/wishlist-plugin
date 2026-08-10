@@ -81,11 +81,9 @@ class Installer {
 			&& 'publish' === $existing_page->post_status
 		) {
 			$page_id = (int) $existing_page->ID;
+			$content = self::normalize_wishlist_shortcode( $existing_page->post_content );
 
-			if ( ! has_shortcode( $existing_page->post_content, 'wishlist_page' ) ) {
-				$content = trim( $existing_page->post_content );
-				$content = $content ? $content . "\n\n[wishlist_page]" : '[wishlist_page]';
-
+			if ( $content !== $existing_page->post_content ) {
 				$result = wp_update_post(
 					array(
 						'ID'           => $page_id,
@@ -119,5 +117,36 @@ class Installer {
 		update_option( Settings::OPTION_NAME, wp_parse_args( $settings, Settings::defaults() ) );
 
 		return (int) $page_id;
+	}
+
+	/**
+	 * Ensure page content contains exactly one wishlist shortcode.
+	 *
+	 * WordPress has not registered plugin shortcodes when an activation hook
+	 * runs, so has_shortcode() cannot be used reliably here.
+	 *
+	 * @param string $content Existing page content.
+	 * @return string Normalized page content.
+	 */
+	private static function normalize_wishlist_shortcode( $content ) {
+		$pattern = '/\[wishlist_page(?:\s[^\]]*)?\]/';
+		$count   = 0;
+
+		$content = preg_replace_callback(
+			$pattern,
+			static function ( $matches ) use ( &$count ) {
+				++$count;
+				return 1 === $count ? $matches[0] : '';
+			},
+			(string) $content
+		);
+
+		$content = trim( preg_replace( "/\n{3,}/", "\n\n", $content ) );
+
+		if ( 0 === $count ) {
+			$content = $content ? $content . "\n\n[wishlist_page]" : '[wishlist_page]';
+		}
+
+		return $content;
 	}
 }
