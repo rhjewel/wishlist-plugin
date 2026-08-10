@@ -63,8 +63,20 @@ class Admin {
 		$current  = get_option( Settings::OPTION_NAME, array() );
 		$current  = wp_parse_args( is_array( $current ) ? $current : array(), $defaults );
 		$input    = is_array( $input ) ? $input : array();
+
+		/*
+		 * update_option() also runs registered setting sanitizers. When there is
+		 * no wishlist settings section in the request, the update comes from
+		 * plugin code (for example, the demo importer), not this admin form.
+		 * Preserve the supplied values instead of treating the update as a
+		 * submission of the General Settings section and discarding other keys.
+		 */
+		if ( ! isset( $_POST['egwl_section'] ) ) {
+			return wp_parse_args( $input, $current );
+		}
+
 		$output   = $current;
-		$section  = isset( $_POST['egwl_section'] ) ? sanitize_key( wp_unslash( $_POST['egwl_section'] ) ) : 'egns-wishlist';
+		$section  = sanitize_key( wp_unslash( $_POST['egwl_section'] ) );
 		$fields   = $this->section_fields( $section );
 
 		foreach ( $fields['checkboxes'] as $key ) {
@@ -368,4 +380,3 @@ class Admin {
 		<?php
 	}
 }
-
