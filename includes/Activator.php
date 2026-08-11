@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Activation tasks.
  *
@@ -7,17 +8,19 @@
 
 namespace WishFlow;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
-class Activator {
+class Activator
+{
 	/**
 	 * Activate plugin.
 	 *
 	 * @return void
 	 */
-	public static function activate() {
+	public static function activate()
+	{
 		Installer::create_tables();
 		Installer::add_default_options();
 		Installer::create_wishlist_page();

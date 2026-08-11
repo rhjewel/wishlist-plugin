@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template loading.
  *
@@ -7,11 +8,12 @@
 
 namespace WishFlow;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
-class Template_Loader {
+class Template_Loader
+{
 	/**
 	 * Render template.
 	 *
@@ -19,17 +21,17 @@ class Template_Loader {
 	 * @param array  $args     Template args.
 	 * @return string
 	 */
-	public static function render( $template, $args = array() ) {
-		$file = WISHFLOW_PATH . 'templates/' . sanitize_file_name( $template ) . '.php';
+	public static function render($template, $args = array())
+	{
+		$file = WISHFLOW_PATH . 'templates/' . sanitize_file_name($template) . '.php';
 
-		if ( ! file_exists( $file ) ) {
+		if (! file_exists($file)) {
 			return '';
 		}
 
 		ob_start();
-		extract( $args, EXTR_SKIP );
+		extract($args, EXTR_SKIP);
 		include $file;
 		return ob_get_clean();
 	}
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Installer helpers.
  *
@@ -7,17 +8,19 @@
 
 namespace WishFlow;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
-class Installer {
+class Installer
+{
 	/**
 	 * Create wishlist table.
 	 *
 	 * @return void
 	 */
-	public static function create_tables() {
+	public static function create_tables()
+	{
 		global $wpdb;
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -41,8 +44,8 @@ class Installer {
 			KEY owner_lookup (owner_type, owner_id)
 		) {$charset_collate};";
 
-		dbDelta( $sql );
-		update_option( 'wishflow_db_version', WISHFLOW_VERSION );
+		dbDelta($sql);
+		update_option('wishflow_db_version', WISHFLOW_VERSION);
 	}
 
 	/**
@@ -50,15 +53,16 @@ class Installer {
 	 *
 	 * @return void
 	 */
-	public static function add_default_options() {
-		$settings = get_option( Settings::OPTION_NAME );
+	public static function add_default_options()
+	{
+		$settings = get_option(Settings::OPTION_NAME);
 
-		if ( is_array( $settings ) ) {
-			update_option( Settings::OPTION_NAME, wp_parse_args( $settings, Settings::defaults() ) );
+		if (is_array($settings)) {
+			update_option(Settings::OPTION_NAME, wp_parse_args($settings, Settings::defaults()));
 			return;
 		}
 
-		add_option( Settings::OPTION_NAME, Settings::defaults() );
+		add_option(Settings::OPTION_NAME, Settings::defaults());
 	}
 
 	/**
@@ -70,20 +74,21 @@ class Installer {
 	 *
 	 * @return int Wishlist page ID, or 0 when the page could not be created.
 	 */
-	public static function create_wishlist_page() {
-		$settings = get_option( Settings::OPTION_NAME, array() );
-		$settings = is_array( $settings ) ? $settings : array();
+	public static function create_wishlist_page()
+	{
+		$settings = get_option(Settings::OPTION_NAME, array());
+		$settings = is_array($settings) ? $settings : array();
 		$page_id  = 0;
-		$existing_page = get_page_by_path( 'wishlist', OBJECT, 'page' );
+		$existing_page = get_page_by_path('wishlist', OBJECT, 'page');
 
 		if (
 			$existing_page instanceof \WP_Post
 			&& 'publish' === $existing_page->post_status
 		) {
 			$page_id = (int) $existing_page->ID;
-			$content = self::normalize_wishlist_shortcode( $existing_page->post_content );
+			$content = self::normalize_wishlist_shortcode($existing_page->post_content);
 
-			if ( $content !== $existing_page->post_content ) {
+			if ($content !== $existing_page->post_content) {
 				$result = wp_update_post(
 					array(
 						'ID'           => $page_id,
@@ -92,14 +97,14 @@ class Installer {
 					true
 				);
 
-				if ( is_wp_error( $result ) ) {
+				if (is_wp_error($result)) {
 					return 0;
 				}
 			}
 		} else {
 			$page_id = wp_insert_post(
 				array(
-					'post_title'   => __( 'Wishlist', 'wishflow' ),
+					'post_title'   => __('Wishlist', 'wishflow'),
 					'post_name'    => 'wishlist',
 					'post_content' => '[wishlist_page]',
 					'post_status'  => 'publish',
@@ -108,13 +113,13 @@ class Installer {
 				true
 			);
 
-			if ( is_wp_error( $page_id ) ) {
+			if (is_wp_error($page_id)) {
 				return 0;
 			}
 		}
 
 		$settings['wishlist_page_id'] = (int) $page_id;
-		update_option( Settings::OPTION_NAME, wp_parse_args( $settings, Settings::defaults() ) );
+		update_option(Settings::OPTION_NAME, wp_parse_args($settings, Settings::defaults()));
 
 		return (int) $page_id;
 	}
@@ -128,22 +133,23 @@ class Installer {
 	 * @param string $content Existing page content.
 	 * @return string Normalized page content.
 	 */
-	private static function normalize_wishlist_shortcode( $content ) {
+	private static function normalize_wishlist_shortcode($content)
+	{
 		$pattern = '/\[wishlist_page(?:\s[^\]]*)?\]/';
 		$count   = 0;
 
 		$content = preg_replace_callback(
 			$pattern,
-			static function ( $matches ) use ( &$count ) {
+			static function ($matches) use (&$count) {
 				++$count;
 				return 1 === $count ? $matches[0] : '';
 			},
 			(string) $content
 		);
 
-		$content = trim( preg_replace( "/\n{3,}/", "\n\n", $content ) );
+		$content = trim(preg_replace("/\n{3,}/", "\n\n", $content));
 
-		if ( 0 === $count ) {
+		if (0 === $count) {
 			$content = $content ? $content . "\n\n[wishlist_page]" : '[wishlist_page]';
 		}
 

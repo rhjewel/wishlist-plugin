@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Deactivation tasks.
  *
@@ -7,11 +8,12 @@
 
 namespace WishFlow;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
-class Deactivator {
+class Deactivator
+{
 	/**
 	 * Deactivate plugin.
 	 *
@@ -19,4 +21,3 @@ class Deactivator {
 	 */
 	public static function deactivate() {}
 }
-

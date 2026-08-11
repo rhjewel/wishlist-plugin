@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Settings access.
  *
@@ -7,11 +8,12 @@
 
 namespace WishFlow;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 
-class Settings {
+class Settings
+{
 	const OPTION_NAME = 'wishflow_settings';
 
 	/**
@@ -19,8 +21,9 @@ class Settings {
 	 *
 	 * @return array
 	 */
-	public static function defaults() {
-		$default_post_types = class_exists( 'WooCommerce' ) ? array( 'product' ) : array( 'post' );
+	public static function defaults()
+	{
+		$default_post_types = class_exists('WooCommerce') ? array('product') : array('post');
 
 		return array(
 			'enabled'                 => 'yes',
@@ -72,9 +75,10 @@ class Settings {
 	 *
 	 * @return array
 	 */
-	public function all() {
-		$options = get_option( self::OPTION_NAME, array() );
-		return wp_parse_args( is_array( $options ) ? $options : array(), self::defaults() );
+	public function all()
+	{
+		$options = get_option(self::OPTION_NAME, array());
+		return wp_parse_args(is_array($options) ? $options : array(), self::defaults());
 	}
 
 	/**
@@ -84,9 +88,10 @@ class Settings {
 	 * @param mixed  $default Fallback.
 	 * @return mixed
 	 */
-	public function get( $key, $default = null ) {
+	public function get($key, $default = null)
+	{
 		$options = $this->all();
-		return array_key_exists( $key, $options ) ? $options[ $key ] : $default;
+		return array_key_exists($key, $options) ? $options[$key] : $default;
 	}
 
 	/**
@@ -95,8 +100,9 @@ class Settings {
 	 * @param string $key Setting key.
 	 * @return bool
 	 */
-	public function get_bool( $key ) {
-		return 'yes' === $this->get( $key );
+	public function get_bool($key)
+	{
+		return 'yes' === $this->get($key);
 	}
 
 	/**
@@ -104,10 +110,11 @@ class Settings {
 	 *
 	 * @return array
 	 */
-	public function enabled_post_types() {
-		$post_types = $this->get( 'enabled_post_types', array() );
-		$post_types = is_array( $post_types ) ? $post_types : array();
-		return array_values( array_diff( array_map( 'sanitize_key', $post_types ), array( 'attachment' ) ) );
+	public function enabled_post_types()
+	{
+		$post_types = $this->get('enabled_post_types', array());
+		$post_types = is_array($post_types) ? $post_types : array();
+		return array_values(array_diff(array_map('sanitize_key', $post_types), array('attachment')));
 	}
 
 	/**
@@ -116,7 +123,8 @@ class Settings {
 	 * @param string $post_type Post type.
 	 * @return bool
 	 */
-	public function is_post_type_enabled( $post_type ) {
-		return in_array( $post_type, $this->enabled_post_types(), true );
+	public function is_post_type_enabled($post_type)
+	{
+		return in_array($post_type, $this->enabled_post_types(), true);
 	}
 }
