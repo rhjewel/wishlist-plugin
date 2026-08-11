@@ -2,10 +2,10 @@
 /**
  * Template loading.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -20,7 +20,7 @@ class Template_Loader {
 	 * @return string
 	 */
 	public static function render( $template, $args = array() ) {
-		$file = EGWL_PATH . 'templates/' . sanitize_file_name( $template ) . '.php';
+		$file = WISHFLOW_PATH . 'templates/' . sanitize_file_name( $template ) . '.php';
 
 		if ( ! file_exists( $file ) ) {
 			return '';

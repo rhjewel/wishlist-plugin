@@ -2,10 +2,10 @@
 /**
  * Wishlist button template.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-use Egns\Wishlist\Icons;
+use WishFlow\Icons;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -13,9 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $normal_icon = $settings->get( 'normal_icon' );
 $added_icon  = $settings->get( 'added_icon' );
-$classes     = trim( 'egwl-button ' . ( $is_added ? 'is-added ' : '' ) . $settings->get( 'button_css_class' ) . ' ' . $extra_class );
+$classes     = trim( 'wishflow-button ' . ( $is_added ? 'is-added ' : '' ) . $settings->get( 'button_css_class' ) . ' ' . $extra_class );
 $icon_size   = absint( $settings->get( 'icon_size' ) );
-$style       = '--egwl-icon-size:' . $icon_size . 'px;--egwl-icon-color:' . esc_attr( $settings->get( 'icon_color' ) ) . ';--egwl-added-icon-color:' . esc_attr( $settings->get( 'added_icon_color' ) ) . ';';
+$style       = '--wishflow-icon-size:' . $icon_size . 'px;--wishflow-icon-color:' . esc_attr( $settings->get( 'icon_color' ) ) . ';--wishflow-added-icon-color:' . esc_attr( $settings->get( 'added_icon_color' ) ) . ';';
 ?>
 <button
 	type="button"
@@ -26,16 +26,16 @@ $style       = '--egwl-icon-size:' . $icon_size . 'px;--egwl-icon-color:' . esc_
 	style="<?php echo esc_attr( $style ); ?>"
 >
 	<?php if ( $show_icon ) : ?>
-		<span class="egwl-icon egwl-icon-normal" aria-hidden="true">
+		<span class="wishflow-icon wishflow-icon-normal" aria-hidden="true">
 			<?php echo wp_kses( $normal_icon, Icons::allowed_svg_tags() ); ?>
 		</span>
-		<span class="egwl-icon egwl-icon-added" aria-hidden="true">
+		<span class="wishflow-icon wishflow-icon-added" aria-hidden="true">
 			<?php echo wp_kses( $added_icon, Icons::allowed_svg_tags() ); ?>
 		</span>
 	<?php endif; ?>
 
 	<?php if ( $show_text ) : ?>
-		<span class="egwl-text"><?php echo esc_html( $is_added ? $settings->get( 'added_button_text' ) : $settings->get( 'button_text' ) ); ?></span>
+		<span class="wishflow-text"><?php echo esc_html( $is_added ? $settings->get( 'added_button_text' ) : $settings->get( 'button_text' ) ); ?></span>
 	<?php endif; ?>
 </button>
 

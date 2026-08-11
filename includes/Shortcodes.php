@@ -2,10 +2,10 @@
 /**
  * Shortcodes.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -69,7 +69,7 @@ class Shortcodes {
 	}
 
 	public function count() {
-		return '<span class="egwl-count">' . esc_html( (string) $this->wishlist->get_count() ) . '</span>';
+		return '<span class="wishflow-count">' . esc_html( (string) $this->wishlist->get_count() ) . '</span>';
 	}
 
 	public function link( $atts = array() ) {
@@ -85,7 +85,7 @@ class Shortcodes {
 		$url     = $page_id ? get_permalink( $page_id ) : home_url( '/' );
 
 		return sprintf(
-			'<a href="%1$s" class="egwl-link">%2$s <span>%3$s</span></a>',
+			'<a href="%1$s" class="wishflow-link">%2$s <span>%3$s</span></a>',
 			esc_url( $url ),
 			esc_html( $atts['text'] ),
 			esc_html( (string) $this->wishlist->get_count() )

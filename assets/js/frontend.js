@@ -2,12 +2,12 @@
 	'use strict';
 
 	function showToast(message) {
-		if (!window.egwlData || !egwlData.toastEnabled || !message) {
+		if (!window.wishflowData || !wishflowData.toastEnabled || !message) {
 			return;
 		}
 
 		var toast = document.createElement('div');
-		toast.className = 'egwl-toast egwl-toast-' + egwlData.toastPosition;
+		toast.className = 'wishflow-toast wishflow-toast-' + wishflowData.toastPosition;
 		toast.textContent = message;
 		document.body.appendChild(toast);
 
@@ -24,7 +24,7 @@
 	}
 
 	function updateCounts(count) {
-		document.querySelectorAll('.egwl-count, .egwl-link span').forEach(function (node) {
+		document.querySelectorAll('.wishflow-count, .wishflow-link span').forEach(function (node) {
 			node.textContent = count;
 		});
 	}
@@ -33,19 +33,19 @@
 		button.classList.toggle('is-added', isAdded);
 		button.setAttribute('aria-pressed', isAdded ? 'true' : 'false');
 
-		var text = button.querySelector('.egwl-text');
-		if (text && window.egwlData) {
-			text.textContent = isAdded ? egwlData.addedText : egwlData.buttonText;
+		var text = button.querySelector('.wishflow-text');
+		if (text && window.wishflowData) {
+			text.textContent = isAdded ? wishflowData.addedText : wishflowData.buttonText;
 		}
 	}
 
 	function post(action, postId) {
 		var data = new FormData();
 		data.append('action', action);
-		data.append('nonce', egwlData.nonce);
+		data.append('nonce', wishflowData.nonce);
 		data.append('post_id', postId);
 
-		return fetch(egwlData.ajaxUrl, {
+		return fetch(wishflowData.ajaxUrl, {
 			method: 'POST',
 			credentials: 'same-origin',
 			body: data
@@ -55,14 +55,14 @@
 	}
 
 	document.addEventListener('click', function (event) {
-		var wishlistButton = event.target.closest('.egwl-button');
-		var removeButton = event.target.closest('.egwl-remove-button');
+		var wishlistButton = event.target.closest('.wishflow-button');
+		var removeButton = event.target.closest('.wishflow-remove-button');
 
 		if (!wishlistButton && !removeButton) {
 			return;
 		}
 
-		if (!window.egwlData || !egwlData.ajaxEnabled) {
+		if (!window.wishflowData || !wishflowData.ajaxEnabled) {
 			return;
 		}
 
@@ -70,7 +70,7 @@
 
 		var button = wishlistButton || removeButton;
 		var postId = button.getAttribute('data-post-id');
-		var action = wishlistButton ? 'egwl_toggle' : 'egwl_remove';
+		var action = wishlistButton ? 'wishflow_toggle' : 'wishflow_remove';
 
 		button.disabled = true;
 
@@ -80,7 +80,7 @@
 			if (!payload || !payload.success) {
 				showToast(payload && payload.data ? payload.data.message : '');
 				if (payload && payload.data && payload.data.code === 'login_required') {
-					window.location.href = egwlData.loginUrl;
+					window.location.href = wishflowData.loginUrl;
 				}
 				return;
 			}
@@ -90,7 +90,7 @@
 			}
 
 			if (removeButton) {
-				var item = removeButton.closest('.egwl-item');
+				var item = removeButton.closest('.wishflow-item');
 				if (item) {
 					item.remove();
 				}

@@ -2,10 +2,10 @@
 /**
  * WooCommerce integrations.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -55,7 +55,7 @@ class WooCommerce {
 				'settings'    => $this->settings,
 				'show_text'   => $this->settings->get_bool( 'show_text' ),
 				'show_icon'   => $this->settings->get_bool( 'show_icon' ),
-				'extra_class' => 'egwl-wc-button',
+				'extra_class' => 'wishflow-wc-button',
 			)
 		);
 	}

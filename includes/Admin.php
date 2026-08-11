@@ -2,10 +2,10 @@
 /**
  * Admin settings pages.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -28,7 +28,7 @@ class Admin {
 			__( 'WishFlow', 'wishflow' ),
 			__( 'WishFlow', 'wishflow' ),
 			'manage_options',
-			'egns-wishlist',
+			'wishflow',
 			array( $this, 'render' ),
 			'dashicons-heart',
 			56
@@ -36,11 +36,11 @@ class Admin {
 
 		foreach ( $this->sections() as $slug => $section ) {
 			add_submenu_page(
-				'egns-wishlist',
+				'wishflow',
 				$section['title'],
 				$section['title'],
 				'manage_options',
-				'egns-wishlist' === $slug ? 'egns-wishlist' : 'egns-wishlist-' . $slug,
+				'wishflow' === $slug ? 'wishflow' : 'wishflow-' . $slug,
 				array( $this, 'render' )
 			);
 		}
@@ -48,7 +48,7 @@ class Admin {
 
 	public function register_settings() {
 		register_setting(
-			'egwl_settings_group',
+			'wishflow_settings_group',
 			Settings::OPTION_NAME,
 			array(
 				'type'              => 'array',
@@ -71,12 +71,12 @@ class Admin {
 		 * Preserve the supplied values instead of treating the update as a
 		 * submission of the General Settings section and discarding other keys.
 		 */
-		if ( ! isset( $_POST['egwl_section'] ) ) {
+		if ( ! isset( $_POST['wishflow_section'] ) ) {
 			return wp_parse_args( $input, $current );
 		}
 
 		$output   = $current;
-		$section  = sanitize_key( wp_unslash( $_POST['egwl_section'] ) );
+		$section  = sanitize_key( wp_unslash( $_POST['wishflow_section'] ) );
 		$fields   = $this->section_fields( $section );
 
 		foreach ( $fields['checkboxes'] as $key ) {
@@ -144,15 +144,15 @@ class Admin {
 		$section = $this->current_section();
 		$options = $this->settings->all();
 		?>
-		<div class="wrap egwl-admin">
+		<div class="wrap wishflow-admin">
 			<h1><?php echo esc_html( $this->sections()[ $section ]['title'] ); ?></h1>
 
 			<form method="post" action="options.php">
-				<?php settings_fields( 'egwl_settings_group' ); ?>
-				<input type="hidden" name="egwl_section" value="<?php echo esc_attr( $section ); ?>">
+				<?php settings_fields( 'wishflow_settings_group' ); ?>
+				<input type="hidden" name="wishflow_section" value="<?php echo esc_attr( $section ); ?>">
 
-				<div class="egwl-admin-grid">
-					<section class="egwl-panel">
+				<div class="wishflow-admin-grid">
+					<section class="wishflow-panel">
 						<?php $this->render_section_fields( $section, $options ); ?>
 					</section>
 				</div>
@@ -165,7 +165,7 @@ class Admin {
 
 	private function sections() {
 		return array(
-			'egns-wishlist'  => array( 'title' => __( 'General Settings', 'wishflow' ) ),
+			'wishflow'  => array( 'title' => __( 'General Settings', 'wishflow' ) ),
 			'post-types'     => array( 'title' => __( 'Post Type Settings', 'wishflow' ) ),
 			'button'         => array( 'title' => __( 'Button Settings', 'wishflow' ) ),
 			'icon'           => array( 'title' => __( 'Icon Settings', 'wishflow' ) ),
@@ -176,16 +176,16 @@ class Admin {
 	}
 
 	private function current_section() {
-		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : 'egns-wishlist';
-		$page = str_replace( 'egns-wishlist-', '', $page );
-		$page = 'egns-wishlist' === $page ? 'egns-wishlist' : $page;
+		$page = isset( $_GET['page'] ) ? sanitize_key( wp_unslash( $_GET['page'] ) ) : 'wishflow';
+		$page = str_replace( 'wishflow-', '', $page );
+		$page = 'wishflow' === $page ? 'wishflow' : $page;
 
-		return array_key_exists( $page, $this->sections() ) ? $page : 'egns-wishlist';
+		return array_key_exists( $page, $this->sections() ) ? $page : 'wishflow';
 	}
 
 	private function section_fields( $section ) {
 		$fields = array(
-			'egns-wishlist' => array(
+			'wishflow' => array(
 				'checkboxes' => array( 'enabled', 'enable_guest', 'enable_ajax', 'redirect_guest_login', 'merge_after_login', 'delete_on_uninstall' ),
 				'fields'     => array( 'wishlist_page_id' ),
 			),
@@ -206,7 +206,7 @@ class Admin {
 				'fields'     => array( 'empty_message' ),
 			),
 			'woocommerce'   => array(
-				'checkboxes' => array( 'enable_wc', 'wc_show_price', 'wc_show_stock', 'wc_show_add_to_cart', 'wc_remove_after_cart' ),
+				'checkboxes' => array( 'enable_wc', 'wc_show_price', 'wc_show_add_to_cart', 'wc_remove_after_cart' ),
 				'fields'     => array( 'wc_single_position', 'wc_loop_position' ),
 			),
 			'notification'  => array(
@@ -215,11 +215,11 @@ class Admin {
 			),
 		);
 
-		return isset( $fields[ $section ] ) ? $fields[ $section ] : $fields['egns-wishlist'];
+		return isset( $fields[ $section ] ) ? $fields[ $section ] : $fields['wishflow'];
 	}
 
 	private function render_section_fields( $section, $options ) {
-		if ( 'egns-wishlist' === $section ) {
+		if ( 'wishflow' === $section ) {
 			$pages = get_pages();
 			$this->checkbox( 'enabled', __( 'Enable Wishlist', 'wishflow' ), $options );
 			$this->checkbox( 'enable_guest', __( 'Enable Guest Wishlist', 'wishflow' ), $options );
@@ -245,7 +245,7 @@ class Admin {
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
 			unset( $post_types['attachment'] );
 			?>
-			<div class="egwl-check-list">
+			<div class="wishflow-check-list">
 				<?php foreach ( $post_types as $post_type ) : ?>
 					<label>
 						<input type="checkbox" name="<?php echo esc_attr( Settings::OPTION_NAME ); ?>[enabled_post_types][]" value="<?php echo esc_attr( $post_type->name ); ?>" <?php checked( in_array( $post_type->name, $options['enabled_post_types'], true ) ); ?>>
@@ -303,7 +303,6 @@ class Admin {
 
 			$this->checkbox( 'enable_wc', __( 'Enable WooCommerce Support', 'wishflow' ), $options );
 			$this->checkbox( 'wc_show_price', __( 'Show Price', 'wishflow' ), $options );
-			$this->checkbox( 'wc_show_stock', __( 'Show Stock Status', 'wishflow' ), $options );
 			$this->checkbox( 'wc_show_add_to_cart', __( 'Show Add to Cart', 'wishflow' ), $options );
 			$this->checkbox( 'wc_remove_after_cart', __( 'Remove After Add to Cart', 'wishflow' ), $options );
 			$this->select( 'wc_single_position', __( 'Single Product Button Position', 'wishflow' ), array(
@@ -333,7 +332,7 @@ class Admin {
 
 	private function checkbox( $key, $label, $options ) {
 		?>
-		<label class="egwl-toggle">
+		<label class="wishflow-toggle">
 			<input type="checkbox" name="<?php echo esc_attr( Settings::OPTION_NAME ); ?>[<?php echo esc_attr( $key ); ?>]" value="yes" <?php checked( 'yes', $options[ $key ] ); ?>>
 			<span><?php echo esc_html( $label ); ?></span>
 		</label>

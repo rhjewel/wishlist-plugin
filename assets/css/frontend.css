@@ -1,4 +1,4 @@
-.egwl-button {
+.wishflow-button {
 	align-items: center;
 	background: transparent;
 	border: 1px solid currentColor;
@@ -13,51 +13,51 @@
 	transition: color .2s ease, opacity .2s ease;
 }
 
-.egwl-button:disabled,
-.egwl-remove-button:disabled {
+.wishflow-button:disabled,
+.wishflow-remove-button:disabled {
 	cursor: progress;
 	opacity: .65;
 }
 
-.egwl-button .egwl-icon {
+.wishflow-button .wishflow-icon {
 	align-items: center;
-	color: var(--egwl-icon-color, currentColor);
+	color: var(--wishflow-icon-color, currentColor);
 	display: inline-flex;
-	height: var(--egwl-icon-size, 18px);
-	width: var(--egwl-icon-size, 18px);
+	height: var(--wishflow-icon-size, 18px);
+	width: var(--wishflow-icon-size, 18px);
 }
 
-.egwl-button .egwl-icon svg {
+.wishflow-button .wishflow-icon svg {
 	height: 100%;
 	width: 100%;
 }
 
-.egwl-button .egwl-icon-added {
+.wishflow-button .wishflow-icon-added {
 	display: none;
 }
 
-.egwl-button.is-added .egwl-icon-normal {
+.wishflow-button.is-added .wishflow-icon-normal {
 	display: none;
 }
 
-.egwl-button.is-added .egwl-icon-added {
-	color: var(--egwl-added-icon-color, #e0245e);
+.wishflow-button.is-added .wishflow-icon-added {
+	color: var(--wishflow-added-icon-color, #e0245e);
 	display: inline-flex;
 }
 
-.egwl-page {
+.wishflow-page {
 	color: #1f2933;
 	margin: 0 auto;
 	max-width: 1240px;
 	width: 100%;
 }
 
-.egwl-panel {
+.wishflow-panel {
 	background: #fff;
 	padding: 52px 56px 64px;
 }
 
-.egwl-page-title {
+.wishflow-page-title {
 	border-bottom: 1px solid #e9ecef;
 	color: #171a1d;
 	font-size: 30px;
@@ -67,13 +67,13 @@
 	padding: 0 0 34px;
 }
 
-.egwl-table-head,
-.egwl-item {
+.wishflow-table-head,
+.wishflow-item {
 	display: grid;
 	grid-template-columns: 48px minmax(300px, 1fr) 220px 180px;
 }
 
-.egwl-table-head {
+.wishflow-table-head {
 	align-items: center;
 	border-bottom: 1px solid #e9ecef;
 	color: #30363b;
@@ -82,23 +82,23 @@
 	min-height: 86px;
 }
 
-.egwl-table-head > span {
+.wishflow-table-head > span {
 	padding: 0 20px;
 }
 
-.egwl-item {
+.wishflow-item {
 	align-items: center;
 	border-bottom: 1px solid #e9ecef;
 	min-height: 176px;
 }
 
-.egwl-remove-cell {
+.wishflow-remove-cell {
 	align-items: center;
 	display: flex;
 	justify-content: flex-start;
 }
 
-.egwl-remove-button {
+.wishflow-remove-button {
 	align-items: center;
 	background: transparent !important;
 	border: 0 !important;
@@ -118,13 +118,13 @@
 	width: 36px;
 }
 
-.egwl-remove-button:hover,
-.egwl-remove-button:focus-visible {
+.wishflow-remove-button:hover,
+.wishflow-remove-button:focus-visible {
 	background: #f2f4f5 !important;
 	color: #e54d42 !important;
 }
 
-.egwl-product-cell {
+.wishflow-product-cell {
 	align-items: center;
 	display: flex;
 	gap: 30px;
@@ -132,11 +132,11 @@
 	padding: 24px 20px;
 }
 
-.egwl-item-image {
+.wishflow-item-image {
 	flex: 0 0 112px;
 }
 
-.egwl-item-image img {
+.wishflow-item-image img {
 	aspect-ratio: 1;
 	border-radius: 0;
 	display: block;
@@ -145,28 +145,28 @@
 	width: 112px;
 }
 
-.egwl-item-content {
+.wishflow-item-content {
 	min-width: 0;
 }
 
-.egwl-item-title {
+.wishflow-item-title {
 	font-size: 17px;
 	font-weight: 500;
 	line-height: 1.45;
 	margin: 0 0 8px;
 }
 
-.egwl-item-title a {
+.wishflow-item-title a {
 	color: #20252a;
 	text-decoration: none;
 	transition: color .2s ease;
 }
 
-.egwl-item-title a:hover {
+.wishflow-item-title a:hover {
 	color: var(--primary-color1, #0067ee);
 }
 
-.egwl-item-meta {
+.wishflow-item-meta {
 	color: #7a8288;
 	display: flex;
 	flex-wrap: wrap;
@@ -174,35 +174,35 @@
 	gap: 6px 12px;
 }
 
-.egwl-product-price {
+.wishflow-product-price {
 	color: #555d63;
 	font-size: 16px;
 	line-height: 1.55;
 	padding: 24px 20px;
 }
 
-.egwl-product-price .price-area,
-.egwl-product-price .price-area h6,
-.egwl-product-price .price-area span,
-.egwl-product-price .price-area strong {
+.wishflow-product-price .price-area,
+.wishflow-product-price .price-area h6,
+.wishflow-product-price .price-area span,
+.wishflow-product-price .price-area strong {
 	color: inherit;
 	font: inherit;
 	margin: 0;
 }
 
-.egwl-product-price .price-area h6,
-.egwl-product-price .price-area > span:first-child {
+.wishflow-product-price .price-area h6,
+.wishflow-product-price .price-area > span:first-child {
 	display: block;
 	font-size: 12px;
 	line-height: 1.4;
 }
 
-.egwl-product-price del {
+.wishflow-product-price del {
 	color: #9aa0a5;
 	margin-right: 5px;
 }
 
-.egwl-item-actions {
+.wishflow-item-actions {
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
@@ -211,7 +211,7 @@
 	padding: 24px 20px;
 }
 
-.egwl-item-actions .button {
+.wishflow-item-actions .button {
 	align-items: center;
 	background: #25292d;
 	border: 1px solid #25292d;
@@ -231,13 +231,13 @@
 	transition: background-color .2s ease, border-color .2s ease, color .2s ease;
 }
 
-.egwl-item-actions .button:hover {
+.wishflow-item-actions .button:hover {
 	background: var(--primary-color1, #0067ee);
 	border-color: var(--primary-color1, #0067ee);
 	color: #fff;
 }
 
-.egwl-empty {
+.wishflow-empty {
 	border: 0;
 	border-bottom: 1px solid #e9ecef;
 	color: #697178;
@@ -245,7 +245,7 @@
 	padding: 42px 0;
 }
 
-.egwl-toast {
+.wishflow-toast {
 	background: #111827;
 	border-radius: 6px;
 	color: #fff;
@@ -259,105 +259,105 @@
 	z-index: 99999;
 }
 
-.egwl-toast.is-visible {
+.wishflow-toast.is-visible {
 	opacity: 1;
 	transform: translateY(0);
 }
 
-.egwl-toast-bottom-right {
+.wishflow-toast-bottom-right {
 	bottom: 24px;
 	right: 24px;
 }
 
-.egwl-toast-bottom-left {
+.wishflow-toast-bottom-left {
 	bottom: 24px;
 	left: 24px;
 }
 
-.egwl-toast-top-right {
+.wishflow-toast-top-right {
 	right: 24px;
 	top: 24px;
 }
 
-.egwl-toast-top-left {
+.wishflow-toast-top-left {
 	left: 24px;
 	top: 24px;
 }
 
 @media (max-width: 991px) {
-	.egwl-panel {
+	.wishflow-panel {
 		padding: 40px 32px 50px;
 	}
 
-	.egwl-table-head,
-	.egwl-item {
+	.wishflow-table-head,
+	.wishflow-item {
 		grid-template-columns: 44px minmax(260px, 1fr) 170px 150px;
 	}
 
-	.egwl-product-cell {
+	.wishflow-product-cell {
 		gap: 20px;
 	}
 
-	.egwl-item-image,
-	.egwl-item-image img {
+	.wishflow-item-image,
+	.wishflow-item-image img {
 		height: 90px;
 		width: 90px;
 	}
 
-	.egwl-item-image {
+	.wishflow-item-image {
 		flex-basis: 90px;
 	}
 }
 
 @media (max-width: 767px) {
-	.egwl-panel {
+	.wishflow-panel {
 		padding: 30px 20px 40px;
 	}
 
-	.egwl-page-title {
+	.wishflow-page-title {
 		font-size: 25px;
 		padding-bottom: 24px;
 	}
 
-	.egwl-table-head {
+	.wishflow-table-head {
 		display: none;
 	}
 
-	.egwl-item {
+	.wishflow-item {
 		align-items: start;
 		grid-template-columns: 34px minmax(0, 1fr);
 		padding: 24px 0;
 	}
 
-	.egwl-remove-cell {
+	.wishflow-remove-cell {
 		grid-column: 1;
 		grid-row: 1;
 	}
 
-	.egwl-remove-button {
+	.wishflow-remove-button {
 		height: 30px;
 		width: 30px;
 	}
 
-	.egwl-product-cell,
-	.egwl-product-price,
-	.egwl-item-actions {
+	.wishflow-product-cell,
+	.wishflow-product-price,
+	.wishflow-item-actions {
 		grid-column: 2;
 		padding: 0;
 	}
 
-	.egwl-product-cell {
+	.wishflow-product-cell {
 		align-items: flex-start;
 		grid-row: 1;
 	}
 
-	.egwl-product-price,
-	.egwl-item-actions {
+	.wishflow-product-price,
+	.wishflow-item-actions {
 		margin-top: 20px;
 	}
 
-	.egwl-product-price::before,
-	.egwl-item-actions::before {
+	.wishflow-product-price::before,
+	.wishflow-item-actions::before {
 		color: #30363b;
 		content: attr(data-label);
 		display: block;
@@ -369,20 +369,20 @@
 		text-transform: uppercase;
 	}
 
-	.egwl-product-price {
+	.wishflow-product-price {
 		grid-row: 2;
 	}
 
-	.egwl-item-actions {
+	.wishflow-item-actions {
 		grid-row: 3;
 		justify-content: flex-start;
 	}
 
-	.egwl-item-image {
+	.wishflow-item-image {
 		flex-basis: 76px;
 	}
 
-	.egwl-item-image img {
+	.wishflow-item-image img {
 		height: 76px;
 		width: 76px;
 	}

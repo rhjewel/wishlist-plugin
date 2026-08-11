@@ -2,17 +2,17 @@
 /**
  * Settings access.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 class Settings {
-	const OPTION_NAME = 'egwl_settings';
+	const OPTION_NAME = 'wishflow_settings';
 
 	/**
 	 * Default settings.
@@ -60,7 +60,6 @@ class Settings {
 			'enable_share'            => 'no',
 			'enable_wc'               => 'yes',
 			'wc_show_price'           => 'yes',
-			'wc_show_stock'           => 'yes',
 			'wc_show_add_to_cart'     => 'yes',
 			'wc_remove_after_cart'    => 'no',
 			'wc_single_position'      => 'woocommerce_after_add_to_cart_button',

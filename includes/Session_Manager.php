@@ -2,17 +2,17 @@
 /**
  * Guest session handling.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 class Session_Manager {
-	const COOKIE_NAME = 'egwl_session_id';
+	const COOKIE_NAME = 'wishflow_session_id';
 
 	/**
 	 * Settings.

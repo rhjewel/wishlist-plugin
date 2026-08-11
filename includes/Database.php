@@ -2,10 +2,10 @@
 /**
  * Wishlist database operations.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -19,7 +19,7 @@ class Database {
 	 */
 	public function get_table_name() {
 		global $wpdb;
-		return $wpdb->prefix . 'egwl_items';
+		return $wpdb->prefix . 'wishflow_items';
 	}
 
 	/**

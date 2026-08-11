@@ -2,10 +2,10 @@
 /**
  * Installer helpers.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -22,7 +22,7 @@ class Installer {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-		$table_name      = $wpdb->prefix . 'egwl_items';
+		$table_name      = $wpdb->prefix . 'wishflow_items';
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$sql = "CREATE TABLE {$table_name} (
@@ -42,7 +42,7 @@ class Installer {
 		) {$charset_collate};";
 
 		dbDelta( $sql );
-		update_option( 'egwl_db_version', EGWL_VERSION );
+		update_option( 'wishflow_db_version', WISHFLOW_VERSION );
 	}
 
 	/**

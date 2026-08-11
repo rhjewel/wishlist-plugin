@@ -2,10 +2,10 @@
 /**
  * AJAX handlers.
  *
- * @package EgnsWishlist
+ * @package WishFlow
  */
 
-namespace Egns\Wishlist;
+namespace WishFlow;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -21,14 +21,14 @@ class Ajax {
 	}
 
 	public function register() {
-		add_action( 'wp_ajax_egwl_toggle', array( $this, 'toggle' ) );
-		add_action( 'wp_ajax_nopriv_egwl_toggle', array( $this, 'toggle' ) );
-		add_action( 'wp_ajax_egwl_remove', array( $this, 'remove' ) );
-		add_action( 'wp_ajax_nopriv_egwl_remove', array( $this, 'remove' ) );
+		add_action( 'wp_ajax_wishflow_toggle', array( $this, 'toggle' ) );
+		add_action( 'wp_ajax_nopriv_wishflow_toggle', array( $this, 'toggle' ) );
+		add_action( 'wp_ajax_wishflow_remove', array( $this, 'remove' ) );
+		add_action( 'wp_ajax_nopriv_wishflow_remove', array( $this, 'remove' ) );
 	}
 
 	public function toggle() {
-		check_ajax_referer( 'egwl_nonce', 'nonce' );
+		check_ajax_referer( 'wishflow_nonce', 'nonce' );
 
 		$post_id      = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 		$variation_id = isset( $_POST['variation_id'] ) ? absint( $_POST['variation_id'] ) : 0;
@@ -38,7 +38,7 @@ class Ajax {
 	}
 
 	public function remove() {
-		check_ajax_referer( 'egwl_nonce', 'nonce' );
+		check_ajax_referer( 'wishflow_nonce', 'nonce' );
 
 		$post_id      = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
 		$variation_id = isset( $_POST['variation_id'] ) ? absint( $_POST['variation_id'] ) : 0;

@@ -1,8 +1,8 @@
-EGNS WISHLIST PLUGIN DOCUMENTATION
+WISHFLOW PLUGIN DOCUMENTATION
 ==================================
 
 Plugin Name: WishFlow
-Version: 1.0.1
+Version: 1.0.0
 Text Domain: wishflow
 
 
@@ -36,7 +36,7 @@ The plugin supports:
 
 1. Upload the plugin folder to:
 
-   wp-content/plugins/egns-wishlist/
+   wp-content/plugins/wishflow/
 
 2. Go to WordPress Admin > Plugins.
 
@@ -96,31 +96,34 @@ If enabled, plugin options and wishlist database table are deleted when the
 plugin is uninstalled.
 
 Wishlist Page
-Select the WordPress page where you added the [wishlist_page] shortcode.
+Select the page that displays [wishlist_page]. WishFlow creates and selects a
+published Wishlist page automatically during activation.
 
 
 5. CREATE A WISHLIST PAGE
 -------------------------
 
-1. Go to WordPress Admin > Pages > Add New.
+WishFlow automatically creates a published page named "Wishlist", adds the
+[wishlist_page] shortcode, and saves it as the default Wishlist page during
+activation.
 
-2. Create a page named for example:
+To use a different page:
 
-   Wishlist
+1. Create or edit a WordPress page.
 
-3. Add this shortcode inside the page content:
+2. Add this shortcode inside the page content:
 
    [wishlist_page]
 
-4. Publish the page.
+3. Publish the page.
 
-5. Go to:
+4. Go to:
 
    WishFlow > General Settings
 
-6. Select this page in the "Wishlist Page" dropdown.
+5. Select this page in the "Wishlist Page" dropdown.
 
-7. Save changes.
+6. Save changes.
 
 You can also use this alias shortcode:
 
@@ -309,7 +312,7 @@ Use this shortcode to show the current wishlist count:
 
 Output example:
 
-   <span class="egwl-count">3</span>
+   <span class="wishflow-count">3</span>
 
 This count updates after AJAX add/remove.
 
@@ -379,9 +382,6 @@ Turns product-specific wishlist behavior on or off.
 Show Price
 Shows WooCommerce product price on the wishlist page.
 
-Show Stock Status
-Shows product stock status on the wishlist page.
-
 Show Add to Cart
 Shows add-to-cart button for simple products on the wishlist page.
 
@@ -405,39 +405,39 @@ wishlist support can be added in a later phase.
 
 Main wishlist button:
 
-   .egwl-button
+   .wishflow-button
 
 Button when item is added:
 
-   .egwl-button.is-added
+   .wishflow-button.is-added
 
 Normal icon:
 
-   .egwl-icon-normal
+   .wishflow-icon-normal
 
 Added icon:
 
-   .egwl-icon-added
+   .wishflow-icon-added
 
 Wishlist count:
 
-   .egwl-count
+   .wishflow-count
 
 Wishlist page wrapper:
 
-   .egwl-page
+   .wishflow-page
 
 Wishlist item:
 
-   .egwl-item
+   .wishflow-item
 
 Remove button:
 
-   .egwl-remove-button
+   .wishflow-remove-button
 
 Toast notification:
 
-   .egwl-toast
+   .wishflow-toast
 
 
 16. BASIC CSS CUSTOMIZATION
@@ -447,18 +447,18 @@ You can add custom CSS in your theme or child theme.
 
 Example:
 
-   .egwl-button {
+   .wishflow-button {
        border-color: #e0245e;
        color: #e0245e;
        border-radius: 6px;
    }
 
-   .egwl-button.is-added {
+   .wishflow-button.is-added {
        background: #e0245e;
        color: #ffffff;
    }
 
-   .egwl-item {
+   .wishflow-item {
        border-color: #dddddd;
    }
 
@@ -468,7 +468,7 @@ Example:
 
 Plugin templates are located in:
 
-   wp-content/plugins/egns-wishlist/templates/
+   wp-content/plugins/wishflow/templates/
 
 Available templates:
 
@@ -486,19 +486,19 @@ override support, add a template override system in Template_Loader.php.
 
 Frontend CSS:
 
-   wp-content/plugins/egns-wishlist/assets/css/frontend.css
+   wp-content/plugins/wishflow/assets/css/frontend.css
 
 Frontend JS:
 
-   wp-content/plugins/egns-wishlist/assets/js/frontend.js
+   wp-content/plugins/wishflow/assets/js/frontend.js
 
 Admin CSS:
 
-   wp-content/plugins/egns-wishlist/assets/css/admin.css
+   wp-content/plugins/wishflow/assets/css/admin.css
 
 Admin JS:
 
-   wp-content/plugins/egns-wishlist/assets/js/admin.js
+   wp-content/plugins/wishflow/assets/js/admin.js
 
 
 19. DATABASE TABLE
@@ -506,7 +506,7 @@ Admin JS:
 
 The plugin creates this custom table on activation:
 
-   {$wpdb->prefix}egwl_items
+   {$wpdb->prefix}wishflow_items
 
 Main columns:
 
@@ -550,6 +550,10 @@ Activation/table creation:
    includes/Activator.php
    includes/Installer.php
 
+Optional integration compatibility and safe class checks:
+
+   includes/Wishflow_core.php
+
 Database operations:
 
    includes/Database.php
@@ -586,6 +590,30 @@ WooCommerce integration:
 
    includes/WooCommerce.php
 
+WishFlow internal identifiers:
+
+- PHP namespace: WishFlow
+- Constants: WISHFLOW_VERSION, WISHFLOW_FILE, WISHFLOW_PATH, WISHFLOW_URL,
+  WISHFLOW_BASENAME
+- Settings option: wishflow_settings
+- Database version option: wishflow_db_version
+- Database table: {$wpdb->prefix}wishflow_items
+- Guest cookie: wishflow_session_id
+- Admin page slug: wishflow (submenus use wishflow-*)
+- Asset handles: wishflow, wishflow-admin
+- JavaScript data object: wishflowData
+- AJAX nonce action: wishflow_nonce
+
+Theme compatibility:
+
+WishFlow\Wishflow_core checks class_exists(), function_exists(), and is_callable() before
+using WooCommerce or theme-specific price helpers. If an integration is not
+available, WishFlow continues without throwing a fatal error. Developers can
+customize integrations with these filters:
+
+- wishflow_price_helper_classes
+- wishflow_wishlist_item_price_html
+
 
 21. HOW TO MODIFY SHORTCODES
 ----------------------------
@@ -614,8 +642,8 @@ AJAX handlers are in:
 
 Current AJAX actions:
 
-   egwl_toggle
-   egwl_remove
+   wishflow_toggle
+   wishflow_remove
 
 Frontend JavaScript sends requests from:
 
@@ -699,6 +727,7 @@ The plugin uses:
 - Strict SVG wp_kses allow-list
 - Prepared SQL queries
 - Custom table unique key for duplicate prevention
+- Optional integration class/function availability checks
 
 When modifying the plugin:
 
@@ -781,34 +810,24 @@ If this option is enabled:
 
 Then uninstall will delete:
 
-- egwl_settings option
-- egwl_db_version option
-- {$wpdb->prefix}egwl_items database table
+- wishflow_settings option
+- wishflow_db_version option
+- {$wpdb->prefix}wishflow_items database table
 
 
 29. RECOMMENDED FIRST SETUP
 ---------------------------
 
-1. Activate the plugin.
+1. Activate the plugin. WishFlow creates and selects the Wishlist page.
 
-2. Create a page named "Wishlist".
+2. Go to WishFlow > Post Type Settings.
 
-3. Add this shortcode:
+3. Select the post types where wishlist should work.
 
-   [wishlist_page]
-
-4. Go to WishFlow > General Settings.
-
-5. Select the Wishlist page.
-
-6. Go to WishFlow > Post Type Settings.
-
-7. Select the post types where wishlist should work.
-
-8. Add [wishlist_button] in your template, Elementor shortcode widget, or page
+4. Add [wishlist_button] in your template, Elementor shortcode widget, or page
    content.
 
-9. Add [wishlist_link] or [wishlist_count] in your header/menu area if needed.
+5. Add [wishlist_link] or [wishlist_count] in your header/menu area if needed.
 
 
 30. CURRENT LIMITATIONS
@@ -817,4 +836,3 @@ Then uninstall will delete:
 - Public share wishlist URLs are not fully implemented yet.
 - WooCommerce variable product variation support is planned for a later phase.
 - Template override from theme is not implemented yet.
-- The plugin does not create the Wishlist page automatically.
