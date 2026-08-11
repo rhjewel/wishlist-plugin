@@ -3,7 +3,7 @@
  * Plugin Name: EGNS Wishlist
  * Plugin URI: https://www.egenslab.com/
  * Description: Reusable wishlist plugin for public WordPress post types with guest and logged-in user support.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Egens Lab
  * Author URI: https://www.egenslab.com/
  * Text Domain: egns-wishlist
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'EGWL_VERSION', '1.0.0' );
+define( 'EGWL_VERSION', '1.0.1' );
 define( 'EGWL_FILE', __FILE__ );
 define( 'EGWL_PATH', plugin_dir_path( __FILE__ ) );
 define( 'EGWL_URL', plugin_dir_url( __FILE__ ) );
