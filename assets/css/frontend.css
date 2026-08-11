@@ -82,7 +82,7 @@
 	min-height: 86px;
 }
 
-.wishflow-table-head > span {
+.wishflow-table-head>span {
 	padding: 0 20px;
 }
 
@@ -191,7 +191,7 @@
 }
 
 .wishflow-product-price .price-area h6,
-.wishflow-product-price .price-area > span:first-child {
+.wishflow-product-price .price-area>span:first-child {
 	display: block;
 	font-size: 12px;
 	line-height: 1.4;
@@ -225,6 +225,7 @@
 	letter-spacing: .06em;
 	line-height: 1;
 	min-height: 44px;
+	min-width: 135px;
 	padding: 12px 22px;
 	text-decoration: none;
 	text-transform: uppercase;
