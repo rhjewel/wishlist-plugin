@@ -445,7 +445,7 @@ egns-wishlist/
 │       └── admin.js
 │
 └── languages/
-    └── egns-wishlist.pot
+    └── wishflow.pot
 ```
 
 ---
@@ -656,13 +656,13 @@ $exists = $wpdb->get_var(
 All user-facing text must be translation-ready.
 
 ```php
-esc_html__( 'Add to Wishlist', 'egns-wishlist' );
+esc_html__( 'Add to Wishlist', 'wishflow' );
 ```
 
 Text domain:
 
 ```text
-egns-wishlist
+wishflow
 ```
 
 ### 9.6 Coding Style
@@ -1218,4 +1218,3 @@ Use these WordPress/WooCommerce references while implementing:
 - WordPress PHP Coding Standards: https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/
 - WordPress Internationalization: https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/
 - WooCommerce Developer Documentation: https://developer.woocommerce.com/docs/
-

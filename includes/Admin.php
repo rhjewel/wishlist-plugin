@@ -25,8 +25,8 @@ class Admin {
 
 	public function menu() {
 		add_menu_page(
-			__( 'Egns-wishlist', 'egns-wishlist' ),
-			__( 'Egns-wishlist', 'egns-wishlist' ),
+			__( 'WishFlow', 'wishflow' ),
+			__( 'WishFlow', 'wishflow' ),
 			'manage_options',
 			'egns-wishlist',
 			array( $this, 'render' ),
@@ -165,13 +165,13 @@ class Admin {
 
 	private function sections() {
 		return array(
-			'egns-wishlist'  => array( 'title' => __( 'General Settings', 'egns-wishlist' ) ),
-			'post-types'     => array( 'title' => __( 'Post Type Settings', 'egns-wishlist' ) ),
-			'button'         => array( 'title' => __( 'Button Settings', 'egns-wishlist' ) ),
-			'icon'           => array( 'title' => __( 'Icon Settings', 'egns-wishlist' ) ),
-			'wishlist-page'  => array( 'title' => __( 'Wishlist Page Settings', 'egns-wishlist' ) ),
-			'woocommerce'    => array( 'title' => __( 'WooCommerce Settings', 'egns-wishlist' ) ),
-			'notification'   => array( 'title' => __( 'Notification Settings', 'egns-wishlist' ) ),
+			'egns-wishlist'  => array( 'title' => __( 'General Settings', 'wishflow' ) ),
+			'post-types'     => array( 'title' => __( 'Post Type Settings', 'wishflow' ) ),
+			'button'         => array( 'title' => __( 'Button Settings', 'wishflow' ) ),
+			'icon'           => array( 'title' => __( 'Icon Settings', 'wishflow' ) ),
+			'wishlist-page'  => array( 'title' => __( 'Wishlist Page Settings', 'wishflow' ) ),
+			'woocommerce'    => array( 'title' => __( 'WooCommerce Settings', 'wishflow' ) ),
+			'notification'   => array( 'title' => __( 'Notification Settings', 'wishflow' ) ),
 		);
 	}
 
@@ -221,17 +221,17 @@ class Admin {
 	private function render_section_fields( $section, $options ) {
 		if ( 'egns-wishlist' === $section ) {
 			$pages = get_pages();
-			$this->checkbox( 'enabled', __( 'Enable Wishlist', 'egns-wishlist' ), $options );
-			$this->checkbox( 'enable_guest', __( 'Enable Guest Wishlist', 'egns-wishlist' ), $options );
-			$this->checkbox( 'enable_ajax', __( 'Enable AJAX', 'egns-wishlist' ), $options );
-			$this->checkbox( 'redirect_guest_login', __( 'Redirect Guest to Login', 'egns-wishlist' ), $options );
-			$this->checkbox( 'merge_after_login', __( 'Merge Guest Wishlist After Login', 'egns-wishlist' ), $options );
-			$this->checkbox( 'delete_on_uninstall', __( 'Delete Data on Uninstall', 'egns-wishlist' ), $options );
+			$this->checkbox( 'enabled', __( 'Enable Wishlist', 'wishflow' ), $options );
+			$this->checkbox( 'enable_guest', __( 'Enable Guest Wishlist', 'wishflow' ), $options );
+			$this->checkbox( 'enable_ajax', __( 'Enable AJAX', 'wishflow' ), $options );
+			$this->checkbox( 'redirect_guest_login', __( 'Redirect Guest to Login', 'wishflow' ), $options );
+			$this->checkbox( 'merge_after_login', __( 'Merge Guest Wishlist After Login', 'wishflow' ), $options );
+			$this->checkbox( 'delete_on_uninstall', __( 'Delete Data on Uninstall', 'wishflow' ), $options );
 			?>
 			<label>
-				<span><?php esc_html_e( 'Wishlist Page', 'egns-wishlist' ); ?></span>
+				<span><?php esc_html_e( 'Wishlist Page', 'wishflow' ); ?></span>
 				<select name="<?php echo esc_attr( Settings::OPTION_NAME ); ?>[wishlist_page_id]">
-					<option value="0"><?php esc_html_e( 'Select page', 'egns-wishlist' ); ?></option>
+					<option value="0"><?php esc_html_e( 'Select page', 'wishflow' ); ?></option>
 					<?php foreach ( $pages as $page ) : ?>
 						<option value="<?php echo esc_attr( $page->ID ); ?>" <?php selected( (int) $options['wishlist_page_id'], (int) $page->ID ); ?>><?php echo esc_html( $page->post_title ); ?></option>
 					<?php endforeach; ?>
@@ -254,80 +254,80 @@ class Admin {
 				<?php endforeach; ?>
 			</div>
 			<?php
-			$this->checkbox( 'auto_display', __( 'Auto Display Button', 'egns-wishlist' ), $options );
-			$this->select( 'auto_display_position', __( 'Auto Display Position', 'egns-wishlist' ), array(
-				'manual'         => __( 'Manual Shortcode Only', 'egns-wishlist' ),
-				'before_content' => __( 'Before Content', 'egns-wishlist' ),
-				'after_content'  => __( 'After Content', 'egns-wishlist' ),
-				'after_title'    => __( 'After Title', 'egns-wishlist' ),
+			$this->checkbox( 'auto_display', __( 'Auto Display Button', 'wishflow' ), $options );
+			$this->select( 'auto_display_position', __( 'Auto Display Position', 'wishflow' ), array(
+				'manual'         => __( 'Manual Shortcode Only', 'wishflow' ),
+				'before_content' => __( 'Before Content', 'wishflow' ),
+				'after_content'  => __( 'After Content', 'wishflow' ),
+				'after_title'    => __( 'After Title', 'wishflow' ),
 			), $options );
 			return;
 		}
 
 		if ( 'button' === $section ) {
-			$this->text( 'button_text', __( 'Button Text', 'egns-wishlist' ), $options );
-			$this->text( 'added_button_text', __( 'Added Button Text', 'egns-wishlist' ), $options );
-			$this->text( 'remove_button_text', __( 'Remove Button Text', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_text', __( 'Show Text', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_icon', __( 'Show Icon', 'egns-wishlist' ), $options );
-			$this->text( 'button_css_class', __( 'Button CSS Class', 'egns-wishlist' ), $options );
+			$this->text( 'button_text', __( 'Button Text', 'wishflow' ), $options );
+			$this->text( 'added_button_text', __( 'Added Button Text', 'wishflow' ), $options );
+			$this->text( 'remove_button_text', __( 'Remove Button Text', 'wishflow' ), $options );
+			$this->checkbox( 'show_text', __( 'Show Text', 'wishflow' ), $options );
+			$this->checkbox( 'show_icon', __( 'Show Icon', 'wishflow' ), $options );
+			$this->text( 'button_css_class', __( 'Button CSS Class', 'wishflow' ), $options );
 			return;
 		}
 
 		if ( 'icon' === $section ) {
-			$this->select( 'icon_type', __( 'Icon Type', 'egns-wishlist' ), array( 'svg' => 'SVG', 'custom' => __( 'Custom HTML', 'egns-wishlist' ) ), $options );
-			$this->textarea( 'normal_icon', __( 'Normal Icon', 'egns-wishlist' ), $options );
-			$this->textarea( 'added_icon', __( 'Added Icon', 'egns-wishlist' ), $options );
-			$this->number( 'icon_size', __( 'Icon Size', 'egns-wishlist' ), $options );
-			$this->text( 'icon_color', __( 'Icon Color', 'egns-wishlist' ), $options );
-			$this->text( 'added_icon_color', __( 'Added Icon Color', 'egns-wishlist' ), $options );
+			$this->select( 'icon_type', __( 'Icon Type', 'wishflow' ), array( 'svg' => 'SVG', 'custom' => __( 'Custom HTML', 'wishflow' ) ), $options );
+			$this->textarea( 'normal_icon', __( 'Normal Icon', 'wishflow' ), $options );
+			$this->textarea( 'added_icon', __( 'Added Icon', 'wishflow' ), $options );
+			$this->number( 'icon_size', __( 'Icon Size', 'wishflow' ), $options );
+			$this->text( 'icon_color', __( 'Icon Color', 'wishflow' ), $options );
+			$this->text( 'added_icon_color', __( 'Added Icon Color', 'wishflow' ), $options );
 			return;
 		}
 
 		if ( 'wishlist-page' === $section ) {
-			$this->textarea( 'empty_message', __( 'Empty Wishlist Message', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_featured_image', __( 'Show Featured Image', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_title', __( 'Show Title', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_post_type', __( 'Show Post Type', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_date_added', __( 'Show Date Added', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_remove_button', __( 'Show Remove Button', 'egns-wishlist' ), $options );
-			$this->checkbox( 'show_view_button', __( 'Show View Button', 'egns-wishlist' ), $options );
-			$this->checkbox( 'enable_share', __( 'Enable Share Wishlist', 'egns-wishlist' ), $options );
+			$this->textarea( 'empty_message', __( 'Empty Wishlist Message', 'wishflow' ), $options );
+			$this->checkbox( 'show_featured_image', __( 'Show Featured Image', 'wishflow' ), $options );
+			$this->checkbox( 'show_title', __( 'Show Title', 'wishflow' ), $options );
+			$this->checkbox( 'show_post_type', __( 'Show Post Type', 'wishflow' ), $options );
+			$this->checkbox( 'show_date_added', __( 'Show Date Added', 'wishflow' ), $options );
+			$this->checkbox( 'show_remove_button', __( 'Show Remove Button', 'wishflow' ), $options );
+			$this->checkbox( 'show_view_button', __( 'Show View Button', 'wishflow' ), $options );
+			$this->checkbox( 'enable_share', __( 'Enable Share Wishlist', 'wishflow' ), $options );
 			return;
 		}
 
 		if ( 'woocommerce' === $section ) {
 			if ( ! class_exists( 'WooCommerce' ) ) {
-				echo '<p>' . esc_html__( 'WooCommerce is not active.', 'egns-wishlist' ) . '</p>';
+				echo '<p>' . esc_html__( 'WooCommerce is not active.', 'wishflow' ) . '</p>';
 			}
 
-			$this->checkbox( 'enable_wc', __( 'Enable WooCommerce Support', 'egns-wishlist' ), $options );
-			$this->checkbox( 'wc_show_price', __( 'Show Price', 'egns-wishlist' ), $options );
-			$this->checkbox( 'wc_show_stock', __( 'Show Stock Status', 'egns-wishlist' ), $options );
-			$this->checkbox( 'wc_show_add_to_cart', __( 'Show Add to Cart', 'egns-wishlist' ), $options );
-			$this->checkbox( 'wc_remove_after_cart', __( 'Remove After Add to Cart', 'egns-wishlist' ), $options );
-			$this->select( 'wc_single_position', __( 'Single Product Button Position', 'egns-wishlist' ), array(
-				'woocommerce_before_add_to_cart_button' => __( 'Before Add to Cart', 'egns-wishlist' ),
-				'woocommerce_after_add_to_cart_button'  => __( 'After Add to Cart', 'egns-wishlist' ),
-				'woocommerce_before_single_product_summary' => __( 'After Product Thumbnail', 'egns-wishlist' ),
+			$this->checkbox( 'enable_wc', __( 'Enable WooCommerce Support', 'wishflow' ), $options );
+			$this->checkbox( 'wc_show_price', __( 'Show Price', 'wishflow' ), $options );
+			$this->checkbox( 'wc_show_stock', __( 'Show Stock Status', 'wishflow' ), $options );
+			$this->checkbox( 'wc_show_add_to_cart', __( 'Show Add to Cart', 'wishflow' ), $options );
+			$this->checkbox( 'wc_remove_after_cart', __( 'Remove After Add to Cart', 'wishflow' ), $options );
+			$this->select( 'wc_single_position', __( 'Single Product Button Position', 'wishflow' ), array(
+				'woocommerce_before_add_to_cart_button' => __( 'Before Add to Cart', 'wishflow' ),
+				'woocommerce_after_add_to_cart_button'  => __( 'After Add to Cart', 'wishflow' ),
+				'woocommerce_before_single_product_summary' => __( 'After Product Thumbnail', 'wishflow' ),
 			), $options );
-			$this->select( 'wc_loop_position', __( 'Shop Loop Button Position', 'egns-wishlist' ), array(
-				'woocommerce_before_shop_loop_item_title' => __( 'After Product Thumbnail', 'egns-wishlist' ),
-				'woocommerce_after_shop_loop_item'        => __( 'After Product', 'egns-wishlist' ),
-				'woocommerce_after_shop_loop_item_title'  => __( 'After Product Title', 'egns-wishlist' ),
+			$this->select( 'wc_loop_position', __( 'Shop Loop Button Position', 'wishflow' ), array(
+				'woocommerce_before_shop_loop_item_title' => __( 'After Product Thumbnail', 'wishflow' ),
+				'woocommerce_after_shop_loop_item'        => __( 'After Product', 'wishflow' ),
+				'woocommerce_after_shop_loop_item_title'  => __( 'After Product Title', 'wishflow' ),
 			), $options );
 			return;
 		}
 
-		$this->checkbox( 'enable_toast', __( 'Enable Toast', 'egns-wishlist' ), $options );
-		$this->text( 'added_message', __( 'Added Message', 'egns-wishlist' ), $options );
-		$this->text( 'removed_message', __( 'Removed Message', 'egns-wishlist' ), $options );
-		$this->text( 'already_added_message', __( 'Already Added Message', 'egns-wishlist' ), $options );
-		$this->select( 'toast_position', __( 'Toast Position', 'egns-wishlist' ), array(
-			'bottom-right' => __( 'Bottom Right', 'egns-wishlist' ),
-			'bottom-left'  => __( 'Bottom Left', 'egns-wishlist' ),
-			'top-right'    => __( 'Top Right', 'egns-wishlist' ),
-			'top-left'     => __( 'Top Left', 'egns-wishlist' ),
+		$this->checkbox( 'enable_toast', __( 'Enable Toast', 'wishflow' ), $options );
+		$this->text( 'added_message', __( 'Added Message', 'wishflow' ), $options );
+		$this->text( 'removed_message', __( 'Removed Message', 'wishflow' ), $options );
+		$this->text( 'already_added_message', __( 'Already Added Message', 'wishflow' ), $options );
+		$this->select( 'toast_position', __( 'Toast Position', 'wishflow' ), array(
+			'bottom-right' => __( 'Bottom Right', 'wishflow' ),
+			'bottom-left'  => __( 'Bottom Left', 'wishflow' ),
+			'top-right'    => __( 'Top Right', 'wishflow' ),
+			'top-left'     => __( 'Top Left', 'wishflow' ),
 		), $options );
 	}
 

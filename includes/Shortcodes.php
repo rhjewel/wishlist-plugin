@@ -75,7 +75,7 @@ class Shortcodes {
 	public function link( $atts = array() ) {
 		$atts = shortcode_atts(
 			array(
-				'text' => __( 'Wishlist', 'egns-wishlist' ),
+				'text' => __( 'Wishlist', 'wishflow' ),
 			),
 			$atts,
 			'wishlist_link'

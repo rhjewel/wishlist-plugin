@@ -99,7 +99,7 @@ class Installer {
 		} else {
 			$page_id = wp_insert_post(
 				array(
-					'post_title'   => __( 'Wishlist', 'egns-wishlist' ),
+					'post_title'   => __( 'Wishlist', 'wishflow' ),
 					'post_name'    => 'wishlist',
 					'post_content' => '[wishlist_page]',
 					'post_status'  => 'publish',

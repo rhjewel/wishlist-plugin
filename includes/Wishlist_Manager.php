@@ -83,17 +83,17 @@ class Wishlist_Manager {
 
 	private function get_valid_owner_and_post( &$post_id ) {
 		if ( ! $this->settings->get_bool( 'enabled' ) ) {
-			return new \WP_Error( 'disabled', __( 'Wishlist is disabled.', 'egns-wishlist' ) );
+			return new \WP_Error( 'disabled', __( 'Wishlist is disabled.', 'wishflow' ) );
 		}
 
 		$post_id = absint( $post_id );
 		if ( ! $post_id || 'publish' !== get_post_status( $post_id ) ) {
-			return new \WP_Error( 'invalid_post', __( 'Invalid wishlist item.', 'egns-wishlist' ) );
+			return new \WP_Error( 'invalid_post', __( 'Invalid wishlist item.', 'wishflow' ) );
 		}
 
 		$post_type = get_post_type( $post_id );
 		if ( ! $this->settings->is_post_type_enabled( $post_type ) ) {
-			return new \WP_Error( 'unsupported_post_type', __( 'This item type is not supported by wishlist.', 'egns-wishlist' ) );
+			return new \WP_Error( 'unsupported_post_type', __( 'This item type is not supported by wishlist.', 'wishflow' ) );
 		}
 
 		return $this->session->get_owner( true );

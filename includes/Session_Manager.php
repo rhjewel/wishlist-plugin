@@ -45,17 +45,17 @@ class Session_Manager {
 		}
 
 		if ( ! $this->settings->get_bool( 'enable_guest' ) ) {
-			return new \WP_Error( 'guest_disabled', __( 'Guest wishlist is disabled.', 'egns-wishlist' ) );
+			return new \WP_Error( 'guest_disabled', __( 'Guest wishlist is disabled.', 'wishflow' ) );
 		}
 
 		if ( $this->settings->get_bool( 'redirect_guest_login' ) ) {
-			return new \WP_Error( 'login_required', __( 'Please log in to use the wishlist.', 'egns-wishlist' ) );
+			return new \WP_Error( 'login_required', __( 'Please log in to use the wishlist.', 'wishflow' ) );
 		}
 
 		$session_id = $this->get_session_id( $create_guest );
 
 		if ( ! $session_id ) {
-			return new \WP_Error( 'missing_session', __( 'Could not create wishlist session.', 'egns-wishlist' ) );
+			return new \WP_Error( 'missing_session', __( 'Could not create wishlist session.', 'wishflow' ) );
 		}
 
 		return array(

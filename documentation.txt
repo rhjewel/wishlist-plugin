@@ -1,15 +1,15 @@
 EGNS WISHLIST PLUGIN DOCUMENTATION
 ==================================
 
-Plugin Name: EGNS Wishlist
-Version: 1.0.0
-Text Domain: egns-wishlist
+Plugin Name: WishFlow
+Version: 1.0.1
+Text Domain: wishflow
 
 
 1. OVERVIEW
 -----------
 
-EGNS Wishlist is a reusable WordPress wishlist plugin. It is not limited to
+WishFlow is a reusable WordPress wishlist plugin. It is not limited to
 WooCommerce products. It can work with posts, pages, products, tours, rooms,
 portfolio items, services, packages, or any public custom post type selected
 from the plugin admin settings.
@@ -40,11 +40,11 @@ The plugin supports:
 
 2. Go to WordPress Admin > Plugins.
 
-3. Activate "EGNS Wishlist".
+3. Activate "WishFlow".
 
 4. After activation, a new admin menu appears:
 
-   Egns-wishlist
+   WishFlow
 
 5. Configure the plugin from the submenu pages.
 
@@ -54,7 +54,7 @@ The plugin supports:
 
 After activation, the plugin creates a main WordPress admin menu:
 
-Egns-wishlist
+WishFlow
 
 Under this menu you will find:
 
@@ -72,7 +72,7 @@ Under this menu you will find:
 
 Location:
 
-WordPress Admin > Egns-wishlist > General Settings
+WordPress Admin > WishFlow > General Settings
 
 Available options:
 
@@ -116,7 +116,7 @@ Select the WordPress page where you added the [wishlist_page] shortcode.
 
 5. Go to:
 
-   Egns-wishlist > General Settings
+   WishFlow > General Settings
 
 6. Select this page in the "Wishlist Page" dropdown.
 
@@ -132,7 +132,7 @@ You can also use this alias shortcode:
 
 Location:
 
-WordPress Admin > Egns-wishlist > Post Type Settings
+WordPress Admin > WishFlow > Post Type Settings
 
 Enabled Post Types
 Select which public post types can use wishlist.
@@ -203,7 +203,7 @@ Adds an extra CSS class to the button.
 
 Location:
 
-WordPress Admin > Egns-wishlist > Button Settings
+WordPress Admin > WishFlow > Button Settings
 
 Button Text
 Text shown when an item is not in wishlist.
@@ -241,7 +241,7 @@ Add a custom class for theme styling.
 
 Location:
 
-WordPress Admin > Egns-wishlist > Icon Settings
+WordPress Admin > WishFlow > Icon Settings
 
 Icon Type
 Current supported type is SVG/custom HTML.
@@ -272,7 +272,7 @@ script, iframe, event attributes, or unsafe HTML. They will be removed.
 
 Location:
 
-WordPress Admin > Egns-wishlist > Wishlist Page Settings
+WordPress Admin > WishFlow > Wishlist Page Settings
 
 Empty Wishlist Message
 Message shown when the wishlist has no items.
@@ -333,7 +333,7 @@ Important:
 
 The link uses the page selected in:
 
-   Egns-wishlist > General Settings > Wishlist Page
+   WishFlow > General Settings > Wishlist Page
 
 
 13. NOTIFICATION SETTINGS
@@ -341,7 +341,7 @@ The link uses the page selected in:
 
 Location:
 
-WordPress Admin > Egns-wishlist > Notification Settings
+WordPress Admin > WishFlow > Notification Settings
 
 Enable Toast
 Show or hide frontend toast notification.
@@ -369,7 +369,7 @@ Choose notification position:
 
 Location:
 
-WordPress Admin > Egns-wishlist > WooCommerce Settings
+WordPress Admin > WishFlow > WooCommerce Settings
 
 These settings are useful only when WooCommerce is active.
 
@@ -738,8 +738,8 @@ Show wishlist page link in header:
 
 Wishlist button does not show:
 
-- Check Egns-wishlist > General Settings > Enable Wishlist.
-- Check Egns-wishlist > Post Type Settings.
+- Check WishFlow > General Settings > Enable Wishlist.
+- Check WishFlow > Post Type Settings.
 - Make sure the current post type is selected.
 - If auto display is off, use [wishlist_button] manually.
 
@@ -777,7 +777,7 @@ By default, data is kept when the plugin is uninstalled.
 
 If this option is enabled:
 
-   Egns-wishlist > General Settings > Delete Data on Uninstall
+   WishFlow > General Settings > Delete Data on Uninstall
 
 Then uninstall will delete:
 
@@ -797,11 +797,11 @@ Then uninstall will delete:
 
    [wishlist_page]
 
-4. Go to Egns-wishlist > General Settings.
+4. Go to WishFlow > General Settings.
 
 5. Select the Wishlist page.
 
-6. Go to Egns-wishlist > Post Type Settings.
+6. Go to WishFlow > Post Type Settings.
 
 7. Select the post types where wishlist should work.
 
@@ -818,4 +818,3 @@ Then uninstall will delete:
 - WooCommerce variable product variation support is planned for a later phase.
 - Template override from theme is not implemented yet.
 - The plugin does not create the Wishlist page automatically.
-

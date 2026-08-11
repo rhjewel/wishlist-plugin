@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: EGNS Wishlist
+ * Plugin Name: WishFlow
  * Plugin URI: https://www.egenslab.com/
- * Description: Reusable wishlist plugin for public WordPress post types with guest and logged-in user support.
+ * Description: WishFlow is a powerful WordPress wishlist plugin for WooCommerce products, posts, and custom post types, making it easy for users to save and manage their favorite content.
  * Version: 1.0.1
  * Author: Egens Lab
  * Author URI: https://www.egenslab.com/
- * Text Domain: egns-wishlist
+ * Text Domain: wishflow
  * Domain Path: /languages
  * License: GPL-2.0-or-later
  *
@@ -46,7 +46,7 @@ register_deactivation_hook( __FILE__, array( '\Egns\Wishlist\Deactivator', 'deac
 add_action(
 	'init',
 	static function () {
-		load_plugin_textdomain( 'egns-wishlist', false, dirname( EGWL_BASENAME ) . '/languages' );
+		load_plugin_textdomain( 'wishflow', false, dirname( EGWL_BASENAME ) . '/languages' );
 		\Egns\Wishlist\Plugin::instance()->init();
 	}
 );
